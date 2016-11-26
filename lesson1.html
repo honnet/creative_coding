@@ -23,11 +23,14 @@
 // and the screen height as "height" or "h"
 
 var ctx = createCanvas("canvas1");
-var block_size = 20;
+var block_size = 150;
+var offset = block_size/2;
 var x = width/2;
 var y = height/2;
-var speed_x = random(-5, 5);
-var speed_y = random(-5, 5);
+var speed_x = random(9, 50);
+var speed_y = random(9, 50);
+
+ctx.background(0);
 
 // much like processing this is the drawing loop that plays repeatedly
 // the actual syntax is a shortcut for requestAnimationFrame
@@ -36,30 +39,21 @@ function draw(){
 
   // shortcut for clearing the screen,
   // takes a rgb value 255,255,255 or a grey value of 0-255
-  //ctx.background(250);
-  ctx.clearRect(0, 0, w, h);
+  ctx.background(0,0,0, 0.1);
 
   x = x + speed_x;
   y = y + speed_y;
 
-  if (x > width) {
-    x = 0;
+  if (x >= width-offset || x <= offset ) {
+    speed_x = speed_x * -1;
   }
 
-  if (y > height) {
-    speed_y = 0;
+  if (y >= height-offset || y <= offset ) {
+    speed_y = speed_y * -1;
   }
 
-  if (x < 0 ) {
-    x = width;
-  }
-
-  if (y < 0 ) {
-    y = height;
-  }
-
-  ctx.fillStyle = "#00aeef";
-  ctx.fillRect(x, y, block_size, block_size);
+  ctx.fillStyle = "#FF0000";
+  ctx.fillEllipse(x, y, block_size, block_size);
 
 } // end draw
 
