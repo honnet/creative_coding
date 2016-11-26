@@ -38,7 +38,8 @@ function addparticle(){
     y: height/2,
     speed_x: random(-5, 5),
     speed_y: random(-5, 5),
-    size: 90
+    size: 90,
+    h: 127 // hsl value
   }
 
   particles.push(particle);
@@ -66,12 +67,12 @@ function draw(){
 
     ctx.fillStyle = "#ffffff";
     ctx.fillPolygon(b.x, b.y, 6, b.size, b.size);
-    ctx.strokeStyle = "#000000";
+
+    b.h = (b.h+6) % 255;
+    ctx.strokeStyle = hsl(b.h, 100, 50);
     ctx.strokePolygon(b.x, b.y, 6, b.size, b.size);
 
   } // end for loop
-
-
 
 } // end draw
 
