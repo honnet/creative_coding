@@ -27,8 +27,11 @@ var block_size = 150;
 var offset = block_size/2;
 var x = width/2;
 var y = height/2;
-var speed_x = random(9, 50);
-var speed_y = random(9, 50);
+
+var step = 90;
+
+var speed_x = random(-step, step);
+var speed_y = random(-step, step);
 
 ctx.background(0);
 
@@ -41,19 +44,30 @@ function draw(){
   // takes a rgb value 255,255,255 or a grey value of 0-255
   ctx.background(0,0,0, 0.1);
 
+  speed_x = random(-step, step);
+  speed_y = random(-step, step);
+
   x = x + speed_x;
   y = y + speed_y;
 
-  if (x >= width-offset || x <= offset ) {
-    speed_x = speed_x * -1;
+  if (x > width) {
+    x = 0;
   }
 
-  if (y >= height-offset || y <= offset ) {
-    speed_y = speed_y * -1;
+  if (y > height) {
+    y = 0;
   }
 
-  ctx.fillStyle = "#FF0000";
-  ctx.fillEllipse(x, y, block_size, block_size);
+  if (x < 0 ) {
+    x = width;
+  }
+
+  if (y < 0 ) {
+    y = height;
+  }
+
+  ctx.strokeStyle = "#FF0000";
+  ctx.strokeEllipse(x, y, block_size, block_size);
 
 } // end draw
 
