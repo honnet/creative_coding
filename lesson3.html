@@ -21,16 +21,16 @@
 
 
 var ctx = createCanvas("canvas1");
-var block_size = 20;
 
 // we create a ball object
 // think of an object like a machine
 var ball = {
-  x:  width/2,
+  x: width/2,
   y: height/2,
-  speed_x: random(-5, 5),
-  speed_y: random(-5, 5),
-  size: 20
+  speed_x: random(20),
+  speed_y: random(20),
+  size: 150,
+  rgb: [0,0,0]
 }
 
 
@@ -52,7 +52,12 @@ function draw(){
     ball.speed_y = ball.speed_y *-1;
   }
 
-  ctx.fillStyle = "#00aeef";
+  for (var i=0; i<3; i++) {
+    var newVal = ball.rgb[i] + random(-10, 10);
+    ball.rgb[i] = clamp(newVal, 0, 255);
+  }
+
+  ctx.fillStyle = rgba(ball.rgb[0], ball.rgb[1], ball.rgb[2], 1);
   ctx.fillEllipse(ball.x, ball.y, ball.size, ball.size);
 
 } // end draw
